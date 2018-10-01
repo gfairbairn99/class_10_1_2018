@@ -29,11 +29,12 @@ glimpse(italian_data)
 
 ```{r}
 italian_data %>% 
-     # filter(date >= "2016-11-01") %>% 
+     filter(date >= "2016-11-01") %>% 
       select(date, firm, n, LN, M5S, PD, FIPDLFI) %>%
       gather(key="party", value = "poll", LN, M5S, PD, FIPDLFI) %>%
       ggplot(aes(x=date,y=poll, color = party)) +
-          geom_line()
+          geom_point(alpha = .2, size = .5) +
+          geom_smooth()
 ```
 
 
