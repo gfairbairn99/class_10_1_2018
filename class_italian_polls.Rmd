@@ -14,8 +14,26 @@ italian_data <- read_csv("https://pollofpolls.eu/get/polls/IT-parliament/format/
 ```
 
 ```{r}
-italian_data
+glimpse(italian_data)
 
+##italian_data %>%
+  ##filter(date >= "2016-11-01") %>%
+   ## ggplot() +
+      ##    geom_line(aes(x=date,y=LN), color = "green") +
+       #   geom_line(aes(x=date,y=PD), color = "red") +
+      #    geom_line(aes(x=date,y=FIPDLFI), color = "light blue") +
+     #     geom_line(aes(x=date,y=M5S), color = "yellow") +
+      #    geom_line(aes(x=date,y=Fdi), color = "dark blue") +
+     #     geom_line(aes(x=date,y=IdV), color = "orange") 
 ```
-purpose of this document is to show polling results in Italy.
+
+```{r}
+italian_data %>% 
+     # filter(date >= "2016-11-01") %>% 
+      select(date, firm, n, LN, M5S, PD, FIPDLFI) %>%
+      gather(key="party", value = "poll", LN, M5S, PD, FIPDLFI) %>%
+      ggplot(aes(x=date,y=poll, color = party)) +
+          geom_line()
+```
+
 
